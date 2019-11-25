@@ -1,21 +1,22 @@
 package config;
 
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.WebDriver;
+import org.junit.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import page.*;
 
 public class BaseTest {
 
+    public static page.mainPage mainPage;
+    public static page.articlePage articlePage;
 
-    public page.mainPage mainPage;
-    public page.articlePage articlePage;
+    public static RemoteWebDriver driver;
 
-    WebDriver driver;
-    @Before
-    public void beforeEeach() {
+    @Rule
+    public ScreenshotOnFailure failure = new ScreenshotOnFailure(driver);
+
+    @BeforeClass
+    public static void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
 
         driver = new ChromeDriver();
@@ -25,8 +26,8 @@ public class BaseTest {
         articlePage = new articlePage(driver);
     }
 
-    @After
-    public void AfterEach(){
+    @AfterClass
+    public static void After(){
         driver.quit();
     }
 }
