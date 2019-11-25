@@ -1,14 +1,14 @@
 package config;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import page.*;
 
 public class BaseTest {
 
-    public static page.mainPage mainPage;
-    public static page.articlePage articlePage;
+    public static PageInstantiator page;
 
     public static RemoteWebDriver driver;
 
@@ -22,8 +22,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.get("http://www.wikipedia.org/");
 
-        mainPage = new mainPage(driver);
-        articlePage = new articlePage(driver);
+        page = new PageInstantiator(driver);
     }
 
     @AfterClass
