@@ -1,11 +1,11 @@
 package all;
 
-import config.BaseTest;
+import config.WebBase;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
-public class TestOne extends BaseTest {
+public class TestOne extends WebBase {
 
     @Test
     public void testOne(){

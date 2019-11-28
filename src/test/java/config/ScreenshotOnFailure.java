@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static config.Utilities.getDateNowScreenshot;
+
 public class ScreenshotOnFailure implements MethodRule {
 
     private WebDriver driver;
@@ -33,10 +35,10 @@ public class ScreenshotOnFailure implements MethodRule {
             }
 
             public void captureScreenshot(String fileName) throws IOException {
-                System.out.println("driver: " + driver);
+                String now = getDateNowScreenshot();
                 File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                 new File("screenshots/").mkdir();
-                File targetFile = new File("screenshots/" + fileName + ".png");
+                File targetFile = new File("screenshots/" + fileName  + now + ".png");
                 Files.copy(scrFile.toPath(), targetFile.toPath());
             }
         };

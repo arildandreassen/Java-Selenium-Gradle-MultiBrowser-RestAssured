@@ -1,8 +1,7 @@
 package config;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
-import page.articlePage;
-import page.mainPage;
+import page.*;
 
 public class PageInstantiator {
 

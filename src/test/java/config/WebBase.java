@@ -6,7 +6,7 @@ import org.junit.Rule;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class BaseTest {
+public class WebBase extends Utilities{
 
     public static PageInstantiator page;
 
