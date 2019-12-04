@@ -32,6 +32,9 @@ dependencies {
 }
 
 tasks.withType(Test) {
+    if (project.hasProperty("browser")) {
+        systemProperties["browser"] = project.properties["browser"]
+    }
     useJUnit(){
 
     }

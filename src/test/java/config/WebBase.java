@@ -4,6 +4,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WebBase extends Utilities{
@@ -17,9 +18,20 @@ public class WebBase extends Utilities{
 
     @BeforeClass
     public static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
 
-        driver = new ChromeDriver();
+        String browserType;
+        if(System.getProperty("browser") != null) {
+            browserType = System.getProperty("browser");
+        } else {
+            browserType = "chrome";
+        }
+        if(browserType.equals("firefox")) {
+            System.setProperty("webdriver.gecko.driver","src/test/resources/driver/firefox/0.26/geckodriver.exe");
+            driver = new FirefoxDriver();
+        } else {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
+            driver = new ChromeDriver();
+        }
         driver.get("http://www.wikipedia.org/");
 
         page = new PageInstantiator(driver);
