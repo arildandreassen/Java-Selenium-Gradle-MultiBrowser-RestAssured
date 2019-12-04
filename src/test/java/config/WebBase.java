@@ -16,7 +16,7 @@ public class WebBase extends Utilities{
     public ScreenshotOnFailure failure = new ScreenshotOnFailure(driver);
 
     @BeforeClass
-    public static void setup() {
+    public static void setupAll() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
 
         driver = new ChromeDriver();
