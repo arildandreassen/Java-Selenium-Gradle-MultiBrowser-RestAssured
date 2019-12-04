@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestOne extends WebBase {
+public class WebTest extends WebBase {
 
     @Before
     public void setup(){
@@ -15,7 +15,7 @@ public class TestOne extends WebBase {
     }
 
     @Test
-    public void testOne(){
+    public void webTest(){
         page.main.searchFor("Lionel Messi");
         assertThat(page.article.getFirstHeaderText()).isEqualTo("Lionel Messi");
     }
