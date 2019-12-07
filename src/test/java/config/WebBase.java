@@ -17,7 +17,8 @@ public class WebBase extends Utilities{
     public ScreenshotOnFailure failure = new ScreenshotOnFailure(driver);
 
     @BeforeClass
-    public static void setupAll() {
+    public static void beforeAll() {
+        logger.info("WebBase Setup");
 
         String browserType;
         if(System.getProperty("browser") != null) {
@@ -27,6 +28,7 @@ public class WebBase extends Utilities{
         }
         if(browserType.equals("firefox")) {
             System.setProperty("webdriver.gecko.driver","src/test/resources/driver/firefox/0.26/geckodriver.exe");
+            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
             driver = new FirefoxDriver();
         } else {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
@@ -38,7 +40,7 @@ public class WebBase extends Utilities{
     }
 
     @AfterClass
-    public static void After(){
+    public static void after(){
         driver.quit();
     }
 }
