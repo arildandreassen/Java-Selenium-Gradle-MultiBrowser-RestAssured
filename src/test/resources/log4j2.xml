@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <properties>
+        <property name="pattern">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+        </Console>
+        <RollingFile name="LogFile" fileName="logs/Test.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.log4j.xml" level="debug">
+            <AppenderRef ref="LogFile"/>
+        </Logger>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="INFO" />
+            <AppenderRef ref="LogFile" level="DEBUG"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<Configuration>-->
+    <!--<properties>-->
+        <!--<property name="pattern">%-5p %c{2} - %m%n</property>-->
+    <!--</properties>-->
+    <!--<Appenders>${name}- -->
+        <!--<RollingFile name="Test" fileName="logs/Test.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">-->
+            <!--<PatternLayout>-->
+                <!--<pattern>${pattern}</pattern>-->
+            <!--</PatternLayout>-->
+            <!--<Policies>-->
+                <!--<SizeBasedTriggeringPolicy size="1 MB"/>-->
+            <!--</Policies>-->
+        <!--</RollingFile>-->
+        <!--<Console name="STDOUT" target="STANDARD_OUT">-->
+            <!--<PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>-->
+        <!--</Console>-->
+    <!--</Appenders>-->
+    <!--<Loggers>-->
+        <!--<Logger name="org.apache.log4j.xml" level="debug">-->
+            <!--<AppenderRef ref="Test"/>-->
+        <!--</Logger>-->
+        <!--<Root level="info">-->
+            <!--<AppenderRef ref="Test" level="INFO"/>-->
+            <!--<AppenderRef ref="STDOUT" level="ERROR"/>-->
+        <!--</Root>-->
+    <!--</Loggers>-->
+<!--</Configuration>-->

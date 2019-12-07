@@ -11,7 +11,7 @@ public class WebTest extends WebBase {
 
     @Before
     public void setup(){
-        System.out.println("setup");
+        logger.info("setting up webTest");
     }
 
     @Test
@@ -22,6 +22,6 @@ public class WebTest extends WebBase {
 
     @After
     public void teardown(){
-        System.out.println("teardown");
+       logger.info("tearing down webTest");
     }
 }
