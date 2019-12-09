@@ -6,7 +6,7 @@ public class RestBase extends Utilities{
 
     @BeforeClass
     public static void beforeAll(){
-        logger.info("Rest setup");
+//        logger.info("Rest setup");
     }
 
     public String getRootUrl() {

@@ -17,8 +17,7 @@ public class DatabaseConnection extends Utilities{
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=testuser;password=password";
             conn = DriverManager.getConnection(url);
-
-            System.out.println("Got it!");
+//            logger.info("Successfully connected to DB");
 
         } catch (SQLException e) {
             throw new Error("Unable to acquire DB Connection", e);
