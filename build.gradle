@@ -1,3 +1,8 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+import java.util.concurrent.TimeUnit;
+
+
 plugins {
     id 'java'
 }
@@ -13,7 +18,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
     testCompile 'org.apache.logging.log4j:log4j-api:2.12.1'
     testCompile 'org.apache.logging.log4j:log4j-core:2.12.1'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
@@ -24,17 +28,48 @@ dependencies {
 }
 
 tasks.withType(Test) {
+    maxParallelForks = 2
     if (project.hasProperty("browser")) {
         systemProperties["browser"] = project.properties["browser"]
     }
+
     useJUnit(){
 
     }
-    testLogging.exceptionFormat = "full"
+
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+
     testLogging {
-        displayGranularity 1
-        showStandardStreams = true
-        events "passed", "failed", "standardOut"
+        // set options for log level LIFECYCLE
+        events TestLogEvent.FAILED,
+                TestLogEvent.PASSED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.STANDARD_OUT
+
+        exceptionFormat TestExceptionFormat.FULL
+        showExceptions true
+        showCauses true
+        showStackTraces true
+    }
+
+    ignoreFailures = true // Always try to run all tests for all modules
+
+    afterSuite { desc, result ->
+        if (!desc.parent) { // will match the outermost suite
+            long totalTime = result.endTime - result.startTime
+            long time = TimeUnit.MILLISECONDS.toSeconds(totalTime)
+            long seconds = (time < 60) ? time : time%60
+            long minutes = ((time - seconds)%3600)/60
+            long hours = (time - seconds - minutes)/3600
+
+            def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped) || Duration: ${hours}h:${minutes}m:${seconds}s"
+            def startItem = '|  ', endItem = '  |'
+            def repeatLength = startItem.length() + output.length() + endItem.length()
+            println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+        }
     }
 }
 

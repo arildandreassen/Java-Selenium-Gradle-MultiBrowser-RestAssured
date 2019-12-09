@@ -26,13 +26,17 @@ public class WebBase extends Utilities{
         } else {
             browserType = "chrome";
         }
-        if(browserType.equals("firefox")) {
-            System.setProperty("webdriver.gecko.driver","src/test/resources/driver/firefox/0.26/geckodriver.exe");
-            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
-            driver = new FirefoxDriver();
-        } else {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
-            driver = new ChromeDriver();
+
+        switch(browserType){
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver","src/test/resources/driver/firefox/0.26/geckodriver.exe");
+                System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
+                driver = new FirefoxDriver();
+                break;
+            default:
+                System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chrome/78.0.3/chromedriver.exe");
+                driver = new ChromeDriver();
+                break;
         }
         driver.get("http://www.wikipedia.org/");
 
