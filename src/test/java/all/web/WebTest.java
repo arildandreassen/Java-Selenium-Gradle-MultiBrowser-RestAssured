@@ -1,12 +1,10 @@
 package all.web;
-
 import config.WebBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class WebTest extends WebBase {
 
@@ -18,7 +16,9 @@ public class WebTest extends WebBase {
     @Test
     public void webTest(){
         page.main.searchFor("Lionel Messi");
-        assertThat(page.article.getFirstHeaderText(), equalTo("Lionel Messi"));
+        assertThat(page.article.getFirstHeaderText())
+                .isEqualTo("Lionel Messi");
+
     }
 
     @After

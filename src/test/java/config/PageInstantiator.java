@@ -5,14 +5,17 @@ import page.*;
 
 public class PageInstantiator {
 
-    public articlePage article;
-    public mainPage main;
+    public ArticlePage article;
+    public MainPage main;
+    public HomePage home;
+    public SideMenu sideMenu;
+    public CommunityPortal communityPortal;
 
     public PageInstantiator(RemoteWebDriver driver){
-        article = new articlePage(driver);
-        main = new mainPage(driver);
-
-
-
+        article = new ArticlePage(driver);
+        main = new MainPage(driver);
+        home = new HomePage(driver);
+        sideMenu = new SideMenu(driver);
+        communityPortal = new CommunityPortal(driver);
     }
 }

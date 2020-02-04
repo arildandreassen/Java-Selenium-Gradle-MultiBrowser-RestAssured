@@ -6,21 +6,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class articlePage {
+public class CommunityPortal {
 
     RemoteWebDriver driver;
 
     @FindBy(id = "firstHeading")
     private WebElement firstHeading = null;
 
-    public articlePage(RemoteWebDriver driver){
+    public CommunityPortal(RemoteWebDriver driver){
         this.driver = driver;
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver,30);
         PageFactory.initElements(factory, this);
     }
 
     public String getFirstHeaderText(){
-        return firstHeading.getText();
+            return firstHeading.getText();
     }
-
 }
