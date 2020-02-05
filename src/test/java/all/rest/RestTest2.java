@@ -3,10 +3,10 @@ package all.rest;
 import config.RestBase;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.get;
+import static org.hamcrest.Matchers.equalTo;
 
-public class RestTest extends RestBase {
+public class RestTest2 extends RestBase {
 
     @Test
     public void restTest(){
